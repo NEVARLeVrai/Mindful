@@ -55,7 +55,8 @@ class AppTheme {
           surface: isAmoled ? Colors.black : null,
         ),
       ).copyWith(
-        fontFamily: 'ArcaMajora3',
+        textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'ArcaMajora3'),
+        primaryTextTheme: ThemeData.dark().primaryTextTheme.apply(fontFamily: 'ArcaMajora3'),
         pageTransitionsTheme: _kPageTransitionTheme,
         scaffoldBackgroundColor: isAmoled ? Colors.black : null,
         extensions: [SkeletonizerConfigData.dark(effect: _kShimmerEffect)],
@@ -68,7 +69,8 @@ class AppTheme {
           brightness: Brightness.light,
         ),
       ).copyWith(
-        fontFamily: 'ArcaMajora3',
+        textTheme: ThemeData.light().textTheme.apply(fontFamily: 'ArcaMajora3'),
+        primaryTextTheme: ThemeData.light().primaryTextTheme.apply(fontFamily: 'ArcaMajora3'),
         pageTransitionsTheme: _kPageTransitionTheme,
         extensions: [SkeletonizerConfigData(effect: _kShimmerEffect)],
       );
