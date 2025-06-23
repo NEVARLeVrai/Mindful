@@ -87,3 +87,11 @@ flutter:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
+
+   fonts:
+     - family: ArcaMajora3
+       fonts:
+         - asset: assets/fonts/ArcaMajora3-Bold.otf
+           weight: 700
+         - asset: assets/fonts/ArcaMajora3-Heavy.otf
+           weight: 900

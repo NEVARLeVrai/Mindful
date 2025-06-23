@@ -55,6 +55,7 @@ class AppTheme {
           surface: isAmoled ? Colors.black : null,
         ),
       ).copyWith(
+        fontFamily: 'ArcaMajora3',
         pageTransitionsTheme: _kPageTransitionTheme,
         scaffoldBackgroundColor: isAmoled ? Colors.black : null,
         extensions: [SkeletonizerConfigData.dark(effect: _kShimmerEffect)],
@@ -67,6 +68,7 @@ class AppTheme {
           brightness: Brightness.light,
         ),
       ).copyWith(
+        fontFamily: 'ArcaMajora3',
         pageTransitionsTheme: _kPageTransitionTheme,
         extensions: [SkeletonizerConfigData(effect: _kShimmerEffect)],
       );
