@@ -39,18 +39,11 @@ android {
 
     signingConfigs {
         release {
-            if (System.getenv("KEYSTORE_FILE") != null) {
-                storeFile file(System.getenv("KEYSTORE_FILE"))
-                storePassword System.getenv("STORE_PASSWORD")
-                keyAlias System.getenv("KEY_ALIAS")
-                keyPassword System.getenv("KEY_PASSWORD")
-            } else {
-                // Fallback vers la debug.keystore
-                storeFile file(System.getProperty("user.home") + "/.android/debug.keystore")
-                storePassword "android"
-                keyAlias "androiddebugkey"
-                keyPassword "android"
-            }
+            // Toujours utiliser la clé debug pour la release
+            storeFile file(System.getProperty("user.home") + "/.android/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
         }
     }
 
