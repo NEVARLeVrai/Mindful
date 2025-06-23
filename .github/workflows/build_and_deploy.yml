@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to build (ex: 1.0.0)'
+        required: false
+        default: ''
 
 jobs:
   build:
@@ -25,12 +31,27 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Extract version from tag
+      - name: Extract version from tag (if any)
         id: extract_version
         run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          VERSION=${TAG#v}
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            TAG=${GITHUB_REF#refs/tags/}
+            VERSION_FROM_TAG=${TAG#v}
+            echo "version_from_tag=$VERSION_FROM_TAG" >> $GITHUB_OUTPUT
+          else
+            echo "version_from_tag=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set final version
+        id: set_version
+        run: |
+          if [[ -n "${{ github.event.inputs.version }}" ]]; then
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          elif [[ -n "${{ steps.extract_version.outputs.version_from_tag }}" ]]; then
+            echo "VERSION=${{ steps.extract_version.outputs.version_from_tag }}" >> $GITHUB_ENV
+          else
+            echo "VERSION=1.0.0" >> $GITHUB_ENV
+          fi
 
       - name: Update pubspec.yaml version
         run: |
